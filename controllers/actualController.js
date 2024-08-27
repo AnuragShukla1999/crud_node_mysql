@@ -54,35 +54,6 @@ const validateActualData = (data) => {
 
 
 
-export const actual_create = async (req, res) => {
-    try {
-        const {
-            project_id, actuals_pm, qb_project_name, month, year, created_at, file_name, poc, others, status
-        } = req.body;
-
-        const validationError = validateActualData(req.body);
-        if (validationError) {
-            return res.status(400).json({ message: validationError });
-        }
-
-        const newActual = await Actual.create({
-            project_id, actuals_pm, qb_project_name, month, year, created_at, file_name, poc, others, status
-        });
-
-        res.status(200).json({
-            message: "Successfully added actuals details",
-            data: newActual
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to create actuals details', error: error.message });
-    }
-};
-
-
-
-
-
-
 
 
 // export const actual_update = async (req, res) => {
@@ -265,6 +236,29 @@ export const actual_create = async (req, res) => {
 
 
 
+export const actual_create = async (req, res) => {
+    try {
+        const {
+            project_id, actuals_pm, qb_project_name, month, year, created_at, file_name, poc, others, status
+        } = req.body;
+
+        const validationError = validateActualData(req.body);
+        if (validationError) {
+            return res.status(400).json({ message: validationError });
+        }
+
+        const newActual = await Actual.create({
+            project_id, actuals_pm, qb_project_name, month, year, created_at, file_name, poc, others, status
+        });
+
+        res.status(200).json({
+            message: "Successfully added actuals details",
+            data: newActual
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to create actuals details', error: error.message });
+    }
+};
 
 
 
