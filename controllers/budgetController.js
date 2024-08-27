@@ -260,7 +260,7 @@ export const budgetUpdate = async (req, res) => {
     try {
         const budgetId = req.params.id;
         const existingBudget = await getBudgetByIdFromDB(budgetId);
-
+        
         if (existingBudget.length === 0) {
             return res.status(404).json({ message: "Budget row not found" });
         }

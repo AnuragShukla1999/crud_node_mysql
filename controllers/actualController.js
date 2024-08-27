@@ -127,6 +127,12 @@ export const actual_create = async (req, res) => {
 
 
 
+
+
+
+
+
+
 // export const actual_update = async (req, res) => {
 //     try {
 //         const actualId = req.params.id;
@@ -230,3 +236,121 @@ export const actual_create = async (req, res) => {
 //         res.status(500).json({ message: error.message });
 //     }
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const actual_update = async (req, res) => {
+    try {
+        const actualId = req.params.id;
+
+        // Check if the actuals row exists
+        const existingActual = await Actual.findByPk(actualId);
+
+        if (!existingActual) {
+            return res.status(404).json({ message: "Actuals row not found" });
+        }
+
+        // Update the actuals row with the provided fields
+        const updatedActual = await existingActual.update(req.body);
+
+        res.status(200).json({
+            message: "Budget row updated",
+            updatedActualData: updatedActual
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+
+
+export const actualsDeleteById = async (req, res) => {
+    try {
+        const actualId = req.params.id;
+        const deleteResult = await Actual.destroy({
+            where: { id: actualId }
+        });
+
+        if (deleteResult === 0) {
+            return res.status(404).json({ message: "Actuals row not found" });
+        }
+
+        res.status(200).json({ message: "Budget row deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+
+
+export const getAllActuals = async (req, res) => {
+    try {
+        const allActuals = await Actual.findAll({
+            order: [['created_at', 'DESC']]
+        });
+
+        res.status(200).json({
+            message: "All Actuals details fetched",
+            success: true,
+            data: allActuals
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
+
+
+export const getActualsById = async (req, res) => {
+    try {
+        const actualId = req.params.id;
+
+        // Fetching the Actuals record by ID
+        const actualsById = await Actual.findByPk(actualId);
+
+        if (!actualsById) {
+            return res.status(404).json({ message: "Actuals row not found" });
+        }
+
+        res.status(200).json({
+            message: "Actuals details fetched",
+            success: true,
+            data: actualsById
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
