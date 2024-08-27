@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
 import budgetRouter from './routes/budgetRoute.js'
+import acutalRouter from './routes/actualRoute.js'
 
 dotenv.config();
 
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/api', budgetRouter)
+app.use('/api', acutalRouter)
 
 
 

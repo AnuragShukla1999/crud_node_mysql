@@ -4,7 +4,7 @@ import { budgetCreate, budgetDeleteById, budgetUpdate, getAllBudget, getBudgetBy
 const router = express.Router();
 
 router.post('/budget', budgetCreate);
-router.post('/budget_update/:id', budgetUpdate);
+router.put('/budget_update/:id', budgetUpdate);
 router.delete('/budget_delete/:id', budgetDeleteById);
 router.get('/all_budget_list', getAllBudget);
 router.get('/budget_data_by_id/:id', getBudgetById);
